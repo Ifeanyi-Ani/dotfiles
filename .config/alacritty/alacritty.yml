@@ -1,18 +1,19 @@
 live_config_reload: true
-import: ["~/git/mbadolato-iTerm2-Color-Schemes-56d74c3/alacritty/Dracula.yml"]
+import: ["~/.config/alacritty/themes/Dracula.yml"]
 
 TERM: "xterm-256color"
 
 window:
-  opacity: 0.9
+  opacity: 0.7
   padding:
-    x: 25
-    y: 20
+    x: 10
+    y: 10
   dynamic_padding: false
-  decorations: none
+  startup_mode: Windowed
+  decorations: None
 
 font:
   normal:
     family: "MesloLGS Nerd Font"
-    style: Regular
-  size: 12.0
+    style: Italic
+  size: 14.0
