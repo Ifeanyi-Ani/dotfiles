@@ -11,7 +11,7 @@
 local dark_opacity = 0.85
 local light_opacity = 0.9
 
-local wallpapers_glob = os.getenv("HOME") .. "/Pictures/wezterm/**"
+local wallpapers_glob = os.getenv("HOME") .. "/.config/wezterm/wallpapers/**"
 
 local b = require("utils/background")
 local cs = require("utils/color_scheme")
@@ -31,13 +31,13 @@ local config = {
 	font_size = 14,
 
 	line_height = 1,
-	font = wezterm.font_with_fallback({
+	font = wezterm.font("RobotoMono Nerd Font"),
+	--[[ {
 		"RobotoMono Nerd Font",
 		"MesloLGS Nerd Font",
 		"MesloLGL Nerd Font",
-		{ family = "Symbols Nerd Font Mono" },
-	}),
-
+		-- { family = "Symbols Nerd Font Mono" },
+	} ]]
 	color_scheme = cs.get_color_scheme(),
 
 	window_padding = {
@@ -59,7 +59,8 @@ local config = {
 	enable_tab_bar = false,
 	native_macos_fullscreen_mode = false,
 	window_close_confirmation = "NeverPrompt",
-	window_decorations = "NONE",
+
+	window_decorations = "TITLE | RESIZE",
 
 	-- keys
 	keys = {

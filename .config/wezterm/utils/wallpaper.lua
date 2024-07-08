@@ -24,7 +24,7 @@ end
 
 M.set_nvim_wallpaper = function(dir, name)
 	return {
-		source = { File = { path = os.getenv("HOME") .. "/.config/wezterm/wallpapers/nvim/" .. name } },
+		source = { File = { path = os.getenv("HOME") .. "/.config/wezterm/wallpapers/" .. name } },
 		height = "Cover",
 		width = "Cover",
 		horizontal_align = "Center",
@@ -36,7 +36,7 @@ M.set_nvim_wallpaper = function(dir, name)
 end
 
 M.set_tmux_session_wallpaper = function(value)
-	local path = os.getenv("HOME") .. "/.config/wezterm/wallpapers/sessions/" .. value .. ".jpeg"
+	local path = os.getenv("HOME") .. "/.config/wezterm/wallpapers/" .. value .. ".jpeg"
 	print(path)
 	return {
 		source = { File = { path = path } },
