@@ -24,9 +24,18 @@ else
   export EDITOR='nvim'
 fi
 
+# ╭──────────────────────────────────────────────────────────╮
+# │                   Sources                                │
+# ╰──────────────────────────────────────────────────────────╯
+
+#  NOTE: zsh-autosuggestions and zsh-syntax-highlighting is install using package manager and
+#        /usr/share is where there are located in my machine
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# ╭──────────────────────────────────────────────────────────╮
+# │                   eval                                   │
+# ╰──────────────────────────────────────────────────────────╯
 eval "$(starship init zsh)"
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
@@ -34,10 +43,12 @@ eval "$(zoxide init zsh)"
 # ---- FZF -----
 
 # Set up fzf key bindings and fuzzy completion
-
+# ╭──────────────────────────────────────────────────────────╮
+# │                 alias                                    │
+# ╰──────────────────────────────────────────────────────────╯
 alias cd="z"
 # ---- Eza (better ls) -----
-
+alias tmux='tmux -u'
 alias ls="eza --icons=always"
 
 alias fd=fdfind
