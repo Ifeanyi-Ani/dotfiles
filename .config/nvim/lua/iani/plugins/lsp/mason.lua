@@ -1,7 +1,5 @@
 return {
   "williamboman/mason.nvim",
-  cmd = "Mason",
-  event = "BufReadpre",
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -17,16 +15,6 @@ return {
 
     -- enable mason and configure icons
     mason.setup({
-
-      log_level = vim.log.levels.DEBUG,
-      registries = {
-        "github:mason-org/mason-registry",
-      },
-
-      providers = {
-        "mason.providers.client",
-        "mason.providers.registry-api",
-      },
       ui = {
         icons = {
           package_installed = "✓",
@@ -49,10 +37,7 @@ return {
         "emmet_ls",
         "prismals",
         "pyright",
-        "solidity",
       },
-      -- auto-install configured servers (with lspconfig)
-      automatic_installation = true, -- not the same as ensure_installed
     })
 
     mason_tool_installer.setup({
@@ -61,9 +46,8 @@ return {
         "stylua", -- lua formatter
         "isort", -- python formatter
         "black", -- python formatter
-        "pylint", -- python linter
-        "eslint_d", -- js linter
-        "typescript-language-server",
+        "pylint",
+        "eslint_d",
       },
     })
   end,
