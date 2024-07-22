@@ -1,7 +1,7 @@
 lastupdatecheck: 0
 recentrepos:
-    - /home/iani/git/dotfiles
     - /home/iani/dev/teamlyf-frontend-svelte
+    - /home/iani/git/dotfiles
     - /home/iani/dev/we-link
     - /home/iani/dev/orbis
     - /home/iani/dev/buymax
@@ -12,6 +12,7 @@ recentrepos:
 startuppopupversion: 5
 lastversion: 0.43.1
 customcommandshistory:
+    - update
     - q
 hidecommandlog: false
 ignorewhitespaceindiffview: false
