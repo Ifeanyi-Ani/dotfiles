@@ -16,7 +16,6 @@ local wallpapers_glob = os.getenv("HOME") .. "/.config/wezterm/wallpapers/**"
 local b = require("utils/background")
 local cs = require("utils/color_scheme")
 local h = require("utils/helpers")
-local k = require("utils/keys")
 local w = require("utils/wallpaper")
 
 local wezterm = require("wezterm")
@@ -31,13 +30,7 @@ local config = {
 	font_size = 14,
 
 	line_height = 1,
-	font = wezterm.font("RobotoMono Nerd Font"),
-	--[[ {
-		"RobotoMono Nerd Font",
-		"MesloLGS Nerd Font",
-		"MesloLGL Nerd Font",
-		-- { family = "Symbols Nerd Font Mono" },
-	} ]]
+	font = wezterm.font("MesloLGS Nerd Font Mono"),
 	color_scheme = cs.get_color_scheme(),
 
 	window_padding = {
@@ -57,127 +50,127 @@ local config = {
 	adjust_window_size_when_changing_font_size = false,
 	debug_key_events = false,
 	enable_tab_bar = false,
-	native_macos_fullscreen_mode = false,
+	tab_bar_at_bottom = false,
+	use_fancy_tab_bar = false,
+	tab_and_split_indices_are_zero_based = true,
 	window_close_confirmation = "NeverPrompt",
+	window_decorations = "NONE",
 
-	window_decorations = "TITLE | RESIZE",
-
-	-- keys
+	leader = { mods = "CTRL", key = "b" },
 	keys = {
-		k.cmd_key(".", k.multiple_actions(":ZenMode")),
-		k.cmd_key("[", act.SendKey({ mods = "CTRL", key = "o" })),
-		k.cmd_key("]", act.SendKey({ mods = "CTRL", key = "i" })),
-		k.cmd_key("f", k.multiple_actions(":Grep")),
-		-- k.cmd_key("H", act.SendKey({ mods = "CTRL", key = "h" })),
-		k.cmd_key("i", k.multiple_actions(":SmartGoTo")),
-		-- k.cmd_key("J", act.SendKey({ mods = "CTRL", key = "j" })),
-		-- k.cmd_key("K", act.SendKey({ mods = "CTRL", key = "k" })),
-		-- k.cmd_key("K", act.SendKey({ mods = "CTRL", key = "k" })),
-		-- k.cmd_key("L", act.SendKey({ mods = "CTRL", key = "l" })),
-		k.cmd_key("O", k.multiple_actions(":GoToSymbol")),
-		k.cmd_key("P", k.multiple_actions(":GoToCommand")),
-		k.cmd_key("p", k.multiple_actions(":GoToFile")),
-		k.cmd_key("q", k.multiple_actions(":qa!")),
-		k.cmd_to_tmux_prefix("1", "1"),
-		k.cmd_to_tmux_prefix("2", "2"),
-		k.cmd_to_tmux_prefix("3", "3"),
-		k.cmd_to_tmux_prefix("4", "4"),
-		k.cmd_to_tmux_prefix("5", "5"),
-		k.cmd_to_tmux_prefix("6", "6"),
-		k.cmd_to_tmux_prefix("7", "7"),
-		k.cmd_to_tmux_prefix("8", "8"),
-		k.cmd_to_tmux_prefix("9", "9"),
-		k.cmd_to_tmux_prefix("`", "n"),
-		k.cmd_to_tmux_prefix("b", "b"),
-		k.cmd_to_tmux_prefix("C", "C"),
-		k.cmd_to_tmux_prefix("d", "D"),
-		k.cmd_to_tmux_prefix("G", "G"),
-		k.cmd_to_tmux_prefix("g", "g"),
-		k.cmd_to_tmux_prefix("j", "J"),
-		k.cmd_to_tmux_prefix("K", "T"),
-		k.cmd_to_tmux_prefix("k", "K"),
-		k.cmd_to_tmux_prefix("l", "L"),
-		k.cmd_to_tmux_prefix("n", '"'),
-		k.cmd_to_tmux_prefix("N", "%"),
-		k.cmd_to_tmux_prefix("o", "u"),
-		k.cmd_to_tmux_prefix("T", "!"),
-		k.cmd_to_tmux_prefix("Y", "Y"),
-		k.cmd_to_tmux_prefix("t", "c"),
-		k.cmd_to_tmux_prefix("w", "x"),
-		k.cmd_to_tmux_prefix("z", "z"),
-		k.cmd_to_tmux_prefix("Z", "Z"),
-
-		k.cmd_key(
-			"R",
-			act.Multiple({
-				act.SendKey({ key = "\x1b" }), -- escape
-				k.multiple_actions(":source %"),
-			})
-		),
-
-		k.cmd_key(
-			"s",
-			act.Multiple({
-				act.SendKey({ key = "\x1b" }), -- escape
-				k.multiple_actions(":w"),
-			})
-		),
-
 		{
-			mods = "CMD|SHIFT",
-			key = "}",
-			action = act.Multiple({
-				act.SendKey({ mods = "CTRL", key = "b" }),
-				act.SendKey({ key = "n" }),
-			}),
-		},
-		{
-			mods = "CMD|SHIFT",
-			key = "{",
-			action = act.Multiple({
-				act.SendKey({ mods = "CTRL", key = "b" }),
-				act.SendKey({ key = "p" }),
-			}),
-		},
-
-		{
+			key = "f",
 			mods = "CTRL",
-			key = "Tab",
-			action = act.Multiple({
-				act.SendKey({ mods = "CTRL", key = "b" }),
-				act.SendKey({ key = "n" }),
-			}),
+			action = wezterm.action.ToggleFullScreen,
 		},
-
 		{
-			mods = "CTRL|SHIFT",
-			key = "Tab",
-			action = act.Multiple({
-				act.SendKey({ mods = "CTRL", key = "b" }),
-				act.SendKey({ key = "n" }),
-			}),
+			key = "'",
+			mods = "CTRL",
+			action = wezterm.action.ClearScrollback("ScrollbackAndViewport"),
 		},
-
-		-- FIX: disable binding
-		-- {
-		-- 	mods = "CMD",
-		-- 	key = "`",
-		-- 	action = act.Multiple({
-		-- 		act.SendKey({ mods = "CTRL", key = "b" }),
-		-- 		act.SendKey({ key = "n" }),
-		-- 	}),
-		-- },
-
-		{
-			mods = "CMD",
-			key = "~",
-			action = act.Multiple({
-				act.SendKey({ mods = "CTRL", key = "b" }),
-				act.SendKey({ key = "p" }),
-			}),
-		},
+		-- 	{
+		-- 		mods = "LEADER",
+		-- 		key = "c",
+		-- 		action = act.SpawnTab("CurrentPaneDomain"),
+		-- 	},
+		-- 	{
+		-- 		mods = "CTRL",
+		-- 		key = "d",
+		-- 		action = act.CloseCurrentPane({ confirm = true }),
+		-- 	},
+		-- 	{
+		-- 		mods = "LEADER",
+		-- 		key = "n",
+		-- 		action = act.ActivateTabRelative(1),
+		-- 	},
+		-- 	{
+		-- 		mods = "LEADER",
+		-- 		key = "p",
+		-- 		action = act.ActivateTabRelative(-1),
+		-- 	},
+		-- 	{
+		-- 		mods = "LEADER",
+		-- 		key = "-",
+		-- 		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+		-- 	},
+		-- 	{
+		-- 		mods = "LEADER",
+		-- 		key = "v",
+		-- 		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+		-- 	},
+		-- 	{
+		-- 		mods = "CTRL",
+		-- 		key = "h",
+		-- 		action = wezterm.action.ActivatePaneDirection("Left"),
+		-- 	},
+		-- 	{
+		-- 		mods = "CTRL",
+		-- 		key = "j",
+		-- 		action = wezterm.action.ActivatePaneDirection("Down"),
+		-- 	},
+		-- 	{
+		-- 		mods = "CTRL",
+		-- 		key = "k",
+		-- 		action = wezterm.action.ActivatePaneDirection("Up"),
+		-- 	},
+		-- 	{
+		-- 		mods = "CTRL",
+		-- 		key = "l",
+		-- 		action = wezterm.action.ActivatePaneDirection("Right"),
+		-- 	},
+		-- 	{
+		-- 		mods = "LEADER",
+		-- 		key = "h",
+		-- 		action = wezterm.action.AdjustPaneSize({ "Left", 5 }),
+		-- 	},
+		-- 	{
+		-- 		mods = "LEADER",
+		-- 		key = "l",
+		-- 		action = wezterm.action.AdjustPaneSize({ "Right", 5 }),
+		-- 	},
+		-- 	{
+		-- 		mods = "LEADER",
+		-- 		key = "j",
+		-- 		action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
+		-- 	},
+		-- 	{
+		-- 		mods = "LEADER",
+		-- 		key = "k",
+		-- 		action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
+		-- 	},
 	},
 }
+
+-- for i = 0, 9 do
+-- 	-- leader + number to activate that tab
+-- 	table.insert(config.keys, {
+-- 		key = tostring(i),
+-- 		mods = "LEADER",
+-- 		action = wezterm.action.ActivateTab(i),
+-- 	})
+-- end
+
+wezterm.on("update-right-status", function(window, _)
+	local SOLID_LEFT_ARROW = ""
+	local ARROW_FOREGROUND = { Foreground = { Color = "#c6a0f6" } }
+	local prefix = ""
+
+	if window:leader_is_active() then
+		prefix = " " .. utf8.char(0x1f30a) -- ocean wave
+		SOLID_LEFT_ARROW = utf8.char(0xe0b2)
+	end
+
+	if window:active_tab():tab_id() ~= 0 then
+		ARROW_FOREGROUND = { Foreground = { Color = "#1e2030" } }
+	end -- arrow color based on if tab is first pane
+
+	window:set_left_status(wezterm.format({
+		{ Background = { Color = "#b7bdf8" } },
+		{ Text = prefix },
+		ARROW_FOREGROUND,
+		{ Text = SOLID_LEFT_ARROW },
+	}))
+end)
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
 	-- local appearance = window:get_appearance()

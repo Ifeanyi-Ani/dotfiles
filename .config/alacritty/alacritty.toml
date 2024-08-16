@@ -1,5 +1,5 @@
 import = [
-    "~/.config/alacritty/themes/themes/coolnight.toml"
+    "~/.config/alacritty/themes/themes/dracula.toml"
 ]
 
 [ env ]
@@ -11,11 +11,11 @@ padding.y = 10
 
 decorations = "none"
 
-# opacity = 0.9
-blur = true
+opacity = 0.5
+# blur = true
 
 [font]
-normal.family = "Monaspace Radon light"
+normal.family = "MesloLGLDZ Nerd Font"
 
 #regular
 size = 12

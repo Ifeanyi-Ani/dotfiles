@@ -1,17 +1,13 @@
 lastupdatecheck: 0
 recentrepos:
-    - /home/iani/dev/teamlyf-frontend-svelte
-    - /home/iani/git/dotfiles
-    - /home/iani/dev/we-link
-    - /home/iani/dev/orbis
     - /home/iani/dev/buymax
-    - /home/iani/dev/blog-backend
-    - /home/iani/dev/SynthureAI
-    - /home/iani/dev/tumblr-blog
-    - /home/iani/dev/myzoda-app
+    - /home/iani/dev/Teamlyf-Frontend-Next
+    - /home/iani/dev/orbis
 startuppopupversion: 5
 lastversion: 0.43.1
 customcommandshistory:
+    - w
+    - 'update: update file path and props'
     - update
     - q
 hidecommandlog: false

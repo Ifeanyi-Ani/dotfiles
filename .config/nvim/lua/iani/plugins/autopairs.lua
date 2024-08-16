@@ -8,7 +8,9 @@ return {
     -- import nvim-autopairs
     local autopairs = require("nvim-autopairs")
 
-    -- configure autopairs
+    -- ╭─────────────────────────────────────────────────────────╮
+    -- │ configure autopairs                                     │
+    -- ╰─────────────────────────────────────────────────────────╯
     autopairs.setup({
       check_ts = true, -- enable treesitter
       ts_config = {
@@ -28,4 +30,3 @@ return {
     cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
   end,
 }
-

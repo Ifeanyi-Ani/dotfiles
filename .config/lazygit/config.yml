@@ -47,7 +47,9 @@ customCommands:
   - key: "b"
     prompts:
       - type: "menu"
-        title: "What kind of branch is it? (from {{ index .SelectedLocalBranch.Name }})"
+        title:
+          "What kind of branch is it? (from {{ index .SelectedLocalBranch.Name
+          }})"
         options:
           - name: "bug"
             value: "bug"
@@ -55,13 +57,29 @@ customCommands:
             value: "feat"
           - name: "hotfix"
             value: "fix"
-            description: "If there is a need to fix a blocker, do a temporary patch, apply a critical framework or configuration change that should be handled immediately."
+            description:
+              "If there is a need to fix a blocker, do a temporary patch, apply
+              a critical framework or configuration change that should be
+              handled immediately."
           - name: "update"
             value: "update"
-            description: "Any new feature or idea that is not part of a release or a sprint. A branch for playing around."
+            description:
+              "Any new feature or idea that is not part of a release or a
+              sprint. A branch for playing around."
+          - name: "chore"
+            value: "chore"
+            description:
+              "Non-feature, non-bugfix work that doesn't add new functionality,
+              such as updating dependencies or fixing build scripts."
+          - name: "refactor"
+            value: "refac"
+            description:
+              "Refactoring existing code without changing its functionality."
       - type: "input"
         title: "What is the {{ index .PromptResponses 0 }} ID?"
         initialValue: ""
-    command: "git checkout -b {{ index .PromptResponses 0 }}/{{ index .PromptResponses 1 }}"
+    command:
+      "git checkout -b {{ index .PromptResponses 0 }}/{{ index .PromptResponses
+      1 }}"
     context: "localBranches"
     loadingText: "creating branch"

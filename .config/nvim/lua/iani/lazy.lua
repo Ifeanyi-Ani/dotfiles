@@ -12,6 +12,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ { import = "iani.plugins" }, { import = "iani.plugins.lsp" } }, {
+  install = {
+    colorscheme = { "dracula" },
+    notify = {
+      enable = true,
+      severity = {
+        warn = "echo",
+        error = "echomsg",
+      },
+    },
+  },
   checker = {
     enabled = true,
     notify = false,

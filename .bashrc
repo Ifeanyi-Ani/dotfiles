@@ -115,3 +115,8 @@ eval "$(starship init bash)"
 CUSTOM_NVIM_PATH=/usr/local/bin/nvim
 alias fd=fdfind
 alias config='/usr/bin/git --git-dir=/home/iani/.dotfiles/ --work-tree=/home/iani'
+. "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
