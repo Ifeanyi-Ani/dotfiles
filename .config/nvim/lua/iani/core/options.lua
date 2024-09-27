@@ -11,6 +11,11 @@ opt.shiftwidth = 2 -- 2 spaces for indent width
 opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
 
+opt.scrolloff = 10
+opt.sidescrolloff = 8
+opt.showmode = false
+opt.undofile = true
+
 opt.wrap = false
 
 -- search settings

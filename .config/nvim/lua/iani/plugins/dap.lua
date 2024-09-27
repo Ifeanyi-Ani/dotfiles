@@ -62,8 +62,8 @@ return {
       dependencies = { "nvim-neotest/nvim-nio" },
       -- stylua: ignore
       keys = {
-        { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
-        { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
+        { "<leader>bu", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
+        { "<leader>be", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
       },
       opts = {},
       config = function(_, opts)
@@ -119,6 +119,8 @@ return {
         -- online, please don't ask me how to install them :)
         ensure_installed = {
           -- Update this to ensure that you have the debuggers for the langs you want
+          "java-debug-adapter",
+          "java-test",
         },
       },
     },
@@ -182,28 +184,28 @@ return {
   end,
   keys = {
     {
-      "<leader>dB",
+      "<leader>bB",
       function()
         require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
       end,
       desc = "Breakpoint Condition",
     },
     {
-      "<leader>db",
+      "<leader>bb",
       function()
         require("dap").toggle_breakpoint()
       end,
       desc = "Toggle Breakpoint",
     },
     {
-      "<leader>dc",
+      "<leader>bc",
       function()
         require("dap").continue()
       end,
       desc = "Continue",
     },
     {
-      "<leader>da",
+      "<leader>ba",
       function()
         if vim.fn.filereadable(".vscode/launch.json") then
           local dap_vscode = require("dap.ext.vscode")
@@ -218,91 +220,91 @@ return {
       desc = "Run with Args",
     },
     {
-      "<leader>dC",
+      "<leader>bC",
       function()
         require("dap").run_to_cursor()
       end,
       desc = "Run to Cursor",
     },
     {
-      "<leader>dg",
+      "<leader>bg",
       function()
         require("dap").goto_()
       end,
       desc = "Go to Line (No Execute)",
     },
     {
-      "<leader>di",
+      "<leader>bi",
       function()
         require("dap").step_into()
       end,
       desc = "Step Into",
     },
     {
-      "<leader>dj",
+      "<leader>bj",
       function()
         require("dap").down()
       end,
       desc = "Down",
     },
     {
-      "<leader>dk",
+      "<leader>bk",
       function()
         require("dap").up()
       end,
       desc = "Up",
     },
     {
-      "<leader>dl",
+      "<leader>bl",
       function()
         require("dap").run_last()
       end,
       desc = "Run Last",
     },
     {
-      "<leader>do",
+      "<leader>bo",
       function()
         require("dap").step_out()
       end,
       desc = "Step Out",
     },
     {
-      "<leader>dO",
+      "<leader>bO",
       function()
         require("dap").step_over()
       end,
       desc = "Step Over",
     },
     {
-      "<leader>dp",
+      "<leader>bp",
       function()
         require("dap").pause()
       end,
       desc = "Pause",
     },
     {
-      "<leader>dr",
+      "<leader>br",
       function()
         require("dap").repl.toggle()
       end,
       desc = "Toggle REPL",
     },
     {
-      "<leader>ds",
+      "<leader>bs",
       function()
         require("dap").session()
       end,
       desc = "Session",
     },
     {
-      "<leader>dt",
+      "<leader>bt",
       function()
         require("dap").terminate()
       end,
       desc = "Terminate",
     },
     {
-      "<leader>dw",
+      "<leader>bw",
       function()
         require("dap.ui.widgets").hover()
       end,
