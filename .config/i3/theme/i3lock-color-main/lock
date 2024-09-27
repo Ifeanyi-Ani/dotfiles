@@ -14,8 +14,6 @@ cyan='#8be9fd'
 green='50fa7b'
 
 i3lock \
-  --insidever-color=$selection$alpha \
-  --insidewrong-color=$selection$alpha \
   --inside-color=$selection$alpha \
   --ringver-color=$green$alpha \
   --ringwrong-color=$red$alpha \

@@ -6,7 +6,7 @@ response=""
 confirm ()
 {
   message="${1:-"Confirm ? "}"
-  response=$(echo -e "No\nYes" | rofi -dmenu -theme ~/.config/i3/conf/rofi/confirm.rasi -p "$message ")
+  response=$(echo -e "No\nYes" | rofi -dmenu -theme ~/.config/rofi/confirm.rasi -p "$message ")
   # echo $response
 }
 
