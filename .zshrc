@@ -63,6 +63,7 @@ alias ls="eza --icons=always"
 alias fd=fdfind
 alias nvmconf=nvim ~/.config/nvim/
 alias config='/usr/bin/git --git-dir=/home/iani/.dotfiles/ --work-tree=/home/iani' # bare repository for managing dotfiles
+alias autotilling='/bin/autotilling.py'
 
 . "$HOME/.cargo/env"
 
