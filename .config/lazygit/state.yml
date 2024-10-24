@@ -1,27 +1,28 @@
 lastupdatecheck: 0
 recentrepos:
-    - /home/iani/dev/tumblr-blog
+    - /home/iani/dev/withread
+    - /home/iani/dev/ifeanyi
     - /home/iani/dev/blog-backend
+    - /home/iani/dev/tumblr-blog
+    - /home/iani/Documents/notes
     - /home/iani/dev/tanqua
     - /home/iani/dev/Teamlyf-Frontend-Next
-    - /home/iani/dev/blog
     - /home/iani/dev/buymax
-    - /home/iani/dev/ifeanyi
     - /home/iani/dev/orbis
 startuppopupversion: 5
 lastversion: 0.43.1
 customcommandshistory:
+    - q
     - truncate post content
     - fix style
     - w
     - 'chores: update store model'
     - 'update: update file path and props'
     - update
-    - q
 hidecommandlog: false
 ignorewhitespaceindiffview: false
 diffcontextsize: 2
-renamesimilaritythreshold: 50
+renamesimilaritythreshold: 45
 localbranchsortorder: recency
 remotebranchsortorder: alphabetical
 gitlogorder: topo-order

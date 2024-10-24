@@ -1,55 +1,72 @@
 gui:
   theme:
     activeBorderColor:
-      - red
+      - "#FF5555" # urgent-bg-color
       - bold
     inactiveBorderColor:
-      - white
+      - "#BFBFBF" # inactive-text-color
     optionsTextColor:
-      - blue
+      - "#8BE9FD" # Dracula cyan
     selectedLineBgColor:
-      - "#203354" # set to `default` to have no background colour
+      - "#44475A" # inactive-bg-color
     selectedRangeBgColor:
-      - blue
+      - "#44475A" # inactive-bg-color
     cherryPickedCommitBgColor:
-      - cyan
+      - "#FFB86C" # Dracula orange
     cherryPickedCommitFgColor:
-      - blue
+      - "#282A36" # bg-color
     unstagedChangesColor:
-      - red
-  log:
-    showWholeGitGraph: true
+      - "#FF5555" # urgent-bg-color
+  nerdFontsVersion: "3"
+  showIcons: true
+  showFileTree: true
+  expandFocusedSidePanel: true
+  mainPanelSplitMode: "flexible"
+  language: "en"
+  timeFormat: "02 Jan 06 15:04 MST"
+  shortTimeFormat: "15:04"
 git:
   paging:
     colorArg: always
-    pager: delta --dark --paging=never --24-bit-color=never
+    pager: delta --dark --paging=never --24-bit-color=never -- --theme='Dracula'
   log:
-    # one of date-order, author-date-order, topo-order.
-    # topo-order makes it easier to read the git log graph, but commits may not
-    # appear chronologically. See https://git-scm.com/docs/git-log#_commit_ordering
     order: "topo-order"
-    # one of always, never, when-maximised
-    # this determines whether the git graph is rendered in the commits panel
     showGraph: "always"
-    # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
     showWholeGraph: false
   commitPrefixes:
-    lb-mobile-app: # This is repository folder name
+    tumblr-blog:
       pattern: "^\\w+\\/(\\w+[^-]*-[^-]*)"
       replace: "[$1] "
-    lb-web-app: # This is repository folder name
+    blog-backend:
       pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
       replace: "[$1] "
-    codeandpepper-careers: # This is repository folder name
+    withread:
       pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
       replace: "[$1] "
+  autoFetch: true
+  branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
+  allBranchesLogCmd: "git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium"
+  overrideGpg: false
+  disableForcePushing: false
+os:
+  editCommand: "nvim"
+  editCommandTemplate: "{{editor}} {{filename}}"
+  openCommand: "xdg-open {{filename}}"
+refresher:
+  refreshInterval: 10
+  fetchInterval: 60
+update:
+  method: prompt
+  days: 14
+reporting: "on"
+confirmOnQuit: false
+quitOnTopLevelReturn: false
+keybinding:
 customCommands:
   - key: "b"
     prompts:
       - type: "menu"
-        title:
-          "What kind of branch is it? (from {{ index .SelectedLocalBranch.Name
-          }})"
+        title: "What kind of branch is it? (from {{ index .SelectedLocalBranch.Name }})"
         options:
           - name: "bug"
             value: "bug"
@@ -57,29 +74,31 @@ customCommands:
             value: "feat"
           - name: "hotfix"
             value: "fix"
-            description:
-              "If there is a need to fix a blocker, do a temporary patch, apply
-              a critical framework or configuration change that should be
-              handled immediately."
+            description: "If there is a need to fix a blocker, do a temporary patch, apply a critical framework or configuration change that should be handled immediately."
           - name: "update"
             value: "update"
-            description:
-              "Any new feature or idea that is not part of a release or a
-              sprint. A branch for playing around."
+            description: "Any new feature or idea that is not part of a release or a sprint. A branch for playing around."
           - name: "chore"
             value: "chore"
-            description:
-              "Non-feature, non-bugfix work that doesn't add new functionality,
-              such as updating dependencies or fixing build scripts."
+            description: "Non-feature, non-bugfix work that doesn't add new functionality, such as updating dependencies or fixing build scripts."
           - name: "refactor"
             value: "refac"
-            description:
-              "Refactoring existing code without changing its functionality."
+            description: "Refactoring existing code without changing its functionality."
       - type: "input"
         title: "What is the {{ index .PromptResponses 0 }} ID?"
         initialValue: ""
-    command:
-      "git checkout -b {{ index .PromptResponses 0 }}/{{ index .PromptResponses
-      1 }}"
+    command: "git checkout -b {{ index .PromptResponses 0 }}/{{ index .PromptResponses 1 }}"
     context: "localBranches"
     loadingText: "creating branch"
+  - key: "C"
+    command: "git cz"
+    context: "files"
+    loadingText: "Opening Commitizen prompt"
+    description: "commit with commitizen"
+  - key: "<c-f>"
+    command: "git fetch --all"
+    context: "global"
+    loadingText: "Fetching"
+    description: "fetch from all remotes"
+notARepository: "prompt"
+promptToReturnFromSubprocess: true

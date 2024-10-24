@@ -32,7 +32,7 @@ return {
         -- show the '~' characters after the end of buffers
         show_end_of_buffer = true, -- default false
         -- use transparent background
-        transparent_bg = true, -- default false
+        transparent_bg = false, -- default false
         -- set custom lualine background color
         lualine_bg_color = "#44475a", -- default nil
         -- set italic comment
@@ -58,7 +58,7 @@ return {
     "folke/tokyonight.nvim",
     priority = 1000,
     config = function()
-      local transparent = true -- set to true if you would like to enable transparency
+      local transparent = false -- set to true if you would like to enable transparency
 
       local bg = "#011628"
       local bg_dark = "#011423"
