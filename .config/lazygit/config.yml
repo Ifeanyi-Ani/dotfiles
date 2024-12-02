@@ -40,6 +40,12 @@ git:
     blog-backend:
       pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
       replace: "[$1] "
+    orbis:
+      pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
+      replace: "[$1] "
+    orbis-backend:
+      pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
+      replace: "[$1] "
     withread:
       pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
       replace: "[$1] "

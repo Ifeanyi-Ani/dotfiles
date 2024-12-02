@@ -3,6 +3,7 @@ return {
   event = "VeryLazy",
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter-refactor",
   },
   config = function()
     require("nvim-treesitter.configs").setup({
@@ -26,6 +27,9 @@ return {
         "yaml",
         "toml",
         "bash",
+        "elixir",
+        "ruby",
+        "php",
       },
       ignore_install = {},
       auto_install = true,
@@ -125,6 +129,26 @@ return {
           },
         },
       },
+      refactor = {
+        highlight_definitions = { enable = true },
+        -- highlight_current_scope = { enable = true },
+        smart_rename = {
+          enable = true,
+          keymaps = {
+            smart_rename = "grr",
+          },
+        },
+        navigation = {
+          enable = true,
+          keymaps = {
+            goto_definition = "gnd",
+            list_definitions = "gnD",
+            list_definitions_toc = "gO",
+            goto_next_usage = "<a-*>",
+            goto_previous_usage = "<a-#>",
+          },
+        },
+      },
     })
 
     local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
@@ -142,7 +166,9 @@ return {
     -- Enhance folding
     vim.opt.foldmethod = "expr"
     vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-    vim.opt.foldenable = false -- Disable folding at startup.
+    vim.opt.foldlevel = 3
+    vim.opt.foldtext =
+      [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend))]]
 
     -- Optimize Treesitter performance
     vim.g.matchup_matchparen_offscreen = { method = "popup" }

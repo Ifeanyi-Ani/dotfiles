@@ -11,10 +11,9 @@
 local dark_opacity = 0.85
 local light_opacity = 0.9
 
-local wallpapers_glob = os.getenv("HOME") .. "/.config/wezterm/wallpapers/**"
+local wallpapers_glob = os.getenv("HOME") .. "/.config/wezterm/wallpapers/soft-sun.jpg"
 
 local b = require("utils/background")
-local cs = require("utils/color_scheme")
 local h = require("utils/helpers")
 local w = require("utils/wallpaper")
 
@@ -28,10 +27,10 @@ local config = {
 	},
 
 	font_size = 14,
-
+	max_fps = 120,
+	enable_kitty_graphics = true,
 	line_height = 1,
 	font = wezterm.font("MesloLGS Nerd Font Mono"),
-	color_scheme = cs.get_color_scheme(),
 
 	window_padding = {
 		left = 10,
@@ -68,87 +67,8 @@ local config = {
 			mods = "CTRL",
 			action = wezterm.action.ClearScrollback("ScrollbackAndViewport"),
 		},
-		-- 	{
-		-- 		mods = "LEADER",
-		-- 		key = "c",
-		-- 		action = act.SpawnTab("CurrentPaneDomain"),
-		-- 	},
-		-- 	{
-		-- 		mods = "CTRL",
-		-- 		key = "d",
-		-- 		action = act.CloseCurrentPane({ confirm = true }),
-		-- 	},
-		-- 	{
-		-- 		mods = "LEADER",
-		-- 		key = "n",
-		-- 		action = act.ActivateTabRelative(1),
-		-- 	},
-		-- 	{
-		-- 		mods = "LEADER",
-		-- 		key = "p",
-		-- 		action = act.ActivateTabRelative(-1),
-		-- 	},
-		-- 	{
-		-- 		mods = "LEADER",
-		-- 		key = "-",
-		-- 		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
-		-- 	},
-		-- 	{
-		-- 		mods = "LEADER",
-		-- 		key = "v",
-		-- 		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-		-- 	},
-		-- 	{
-		-- 		mods = "CTRL",
-		-- 		key = "h",
-		-- 		action = wezterm.action.ActivatePaneDirection("Left"),
-		-- 	},
-		-- 	{
-		-- 		mods = "CTRL",
-		-- 		key = "j",
-		-- 		action = wezterm.action.ActivatePaneDirection("Down"),
-		-- 	},
-		-- 	{
-		-- 		mods = "CTRL",
-		-- 		key = "k",
-		-- 		action = wezterm.action.ActivatePaneDirection("Up"),
-		-- 	},
-		-- 	{
-		-- 		mods = "CTRL",
-		-- 		key = "l",
-		-- 		action = wezterm.action.ActivatePaneDirection("Right"),
-		-- 	},
-		-- 	{
-		-- 		mods = "LEADER",
-		-- 		key = "h",
-		-- 		action = wezterm.action.AdjustPaneSize({ "Left", 5 }),
-		-- 	},
-		-- 	{
-		-- 		mods = "LEADER",
-		-- 		key = "l",
-		-- 		action = wezterm.action.AdjustPaneSize({ "Right", 5 }),
-		-- 	},
-		-- 	{
-		-- 		mods = "LEADER",
-		-- 		key = "j",
-		-- 		action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
-		-- 	},
-		-- 	{
-		-- 		mods = "LEADER",
-		-- 		key = "k",
-		-- 		action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
-		-- 	},
 	},
 }
-
--- for i = 0, 9 do
--- 	-- leader + number to activate that tab
--- 	table.insert(config.keys, {
--- 		key = tostring(i),
--- 		mods = "LEADER",
--- 		action = wezterm.action.ActivateTab(i),
--- 	})
--- end
 
 wezterm.on("update-right-status", function(window, _)
 	local SOLID_LEFT_ARROW = ""
@@ -173,8 +93,6 @@ wezterm.on("update-right-status", function(window, _)
 end)
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
-	-- local appearance = window:get_appearance()
-	-- local is_dark = appearance:find("Dark")
 	local overrides = window:get_config_overrides() or {}
 	wezterm.log_info("name", name)
 	wezterm.log_info("value", value)
@@ -220,20 +138,6 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
 				window:perform_action(wezterm.action.DecreaseFontSize, pane)
 				number_value = number_value - 1
 			end
-			-- overrides.background = {
-			-- 	w.set_nvim_wallpaper("Diffview.jpeg"),
-			--
-			-- 	{
-			-- 		source = {
-			-- 			Gradient = {
-			-- 				colors = { "#000000" },
-			-- 			},
-			-- 		},
-			-- 		width = "100%",
-			-- 		height = "100%",
-			-- 		opacity = 0.95,
-			-- 	},
-			-- }
 		elseif number_value < 0 then
 			window:perform_action(wezterm.action.ResetFontSize, pane)
 			overrides.background = nil

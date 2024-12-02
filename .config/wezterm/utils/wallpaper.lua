@@ -22,32 +22,32 @@ M.get_wallpaper = function(dir)
 	}
 end
 
-M.set_nvim_wallpaper = function(dir, name)
-	return {
-		source = { File = { path = os.getenv("HOME") .. "/.config/wezterm/wallpapers/" .. name } },
-		height = "Cover",
-		width = "Cover",
-		horizontal_align = "Center",
-		repeat_x = "Repeat",
-		repeat_y = "Repeat",
-		opacity = 1,
-		-- speed = 200,
-	}
-end
-
-M.set_tmux_session_wallpaper = function(value)
-	local path = os.getenv("HOME") .. "/.config/wezterm/wallpapers/" .. value .. ".jpeg"
-	print(path)
-	return {
-		source = { File = { path = path } },
-		height = "Cover",
-		width = "Cover",
-		horizontal_align = "Center",
-		repeat_x = "Repeat",
-		repeat_y = "Repeat",
-		opacity = 1,
-		-- speed = 200,
-	}
-end
+-- M.set_nvim_wallpaper = function(dir, name)
+-- 	return {
+-- 		source = { File = { path = os.getenv("HOME") .. "/.config/wezterm/wallpapers2/" .. name } },
+-- 		height = "Cover",
+-- 		width = "Cover",
+-- 		horizontal_align = "Center",
+-- 		repeat_x = "Repeat",
+-- 		repeat_y = "Repeat",
+-- 		opacity = 1,
+-- 		-- speed = 200,
+-- 	}
+-- end
+--
+-- M.set_tmux_session_wallpaper = function(value)
+-- 	local path = os.getenv("HOME") .. "/.config/wezterm/wallpapers2/" .. value .. ".gif"
+-- 	print(path)
+-- 	return {
+-- 		source = { File = { path = path } },
+-- 		height = "Cover",
+-- 		width = "Cover",
+-- 		horizontal_align = "Center",
+-- 		repeat_x = "Repeat",
+-- 		repeat_y = "Repeat",
+-- 		opacity = 1,
+-- 		-- speed = 200,
+-- 	}
+-- end
 
 return M

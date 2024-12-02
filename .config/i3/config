@@ -5,7 +5,7 @@
 set $mod Mod1
 
 # Font for window titles and bar
-font pango:MesloLGM Nerd Font 12
+font pango:MesloLGM Nerd Font 14
 
 # Autostart applications
 exec --no-startup-id dex --autostart --environment i3
@@ -99,7 +99,7 @@ set $ws2 "2:Code"
 set $ws3 "3:Browser"
 set $ws4 "4:Files"
 set $ws5 "5:Media"
-set $ws6 "6"
+set $ws6 "6":
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
@@ -188,11 +188,22 @@ for_window [class="Conky"] sticky enable
 # Additional controls
 bindsym $mod+shift+v exec --no-startup-id pavucontrol
 bindsym $mod+Pause exec --no-startup-id ~/.config/i3/utils/screanshot.sh
-bindsym Pause exec import ~/Pictures/maim/$(date +%Y-%m-%d-%H:%M:%S).png
+bindsym Pause exec import ~/Pictures/maim/pic-$(date +%Y-%m-%d-%H:%M:%S).png
+
+# Simple scratchpad with current terminal
+bindsym $mod+Shift+period move scratchpad
+bindsym $mod+period scratchpad show
+
+# Dedicated scratchpad terminal
+bindsym $mod+t exec --no-startup-id "alacritty --class=scratchterm"
+for_window [class="scratchterm"] floating enable
+for_window [class="scratchterm"] resize set 800 600
+for_window [class="scratchterm"] move position center
+for_window [class="scratchterm"] move scratchpad
 
 # Assign applications to workspaces (you can uncomment and modify these as needed)
 assign [class="Alacritty"] $ws1
-assign [class="Code"] $ws2
+assign [class="wezterm"] $ws2
 assign [class="Brave"] $ws3
-# assign [class="Thunar"] $ws4
+assign [class="Pcmanfm"] $ws4
 assign [class="vlc"] $ws5

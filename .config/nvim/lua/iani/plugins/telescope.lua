@@ -13,7 +13,6 @@ return {
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
-    local trouble = require("trouble")
     local lga_actions = require("telescope-live-grep-args.actions")
 
     telescope.setup({

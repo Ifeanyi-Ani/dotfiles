@@ -6,12 +6,10 @@ local h = require("utils/helpers")
 -- @param light (int) Represents the lightness level of the background.
 -- @return The computed background color.
 M.get_background = function(dark, light)
-	dark = dark or 0.8
-	light = light or 0.8
 	return {
 		source = {
 			Gradient = {
-				colors = { h.is_dark() and "#282A36" or "#191A21" },
+				colors = { h.is_dark() and "#000" or "#000" },
 			},
 		},
 		width = "100%",

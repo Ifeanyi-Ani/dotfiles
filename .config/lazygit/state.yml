@@ -1,14 +1,20 @@
 lastupdatecheck: 0
 recentrepos:
-    - /home/iani/dev/withread
-    - /home/iani/dev/ifeanyi
-    - /home/iani/dev/blog-backend
     - /home/iani/dev/tumblr-blog
-    - /home/iani/Documents/notes
-    - /home/iani/dev/tanqua
-    - /home/iani/dev/Teamlyf-Frontend-Next
-    - /home/iani/dev/buymax
+    - /home/iani/dev/withread-backend
+    - /home/iani/dev/withread-prac
+    - /home/iani/dev/withread-local
+    - /home/iani/dev/ifeanyi
+    - /home/iani/dev/withread
+    - /home/iani/dev/orbis-backend
     - /home/iani/dev/orbis
+    - /home/iani/dev/settleinn
+    - /home/iani/dev/tanqua
+    - /home/iani/dev/react-native-fun
+    - /home/iani/dev/buymax
+    - /home/iani/Documents/notes
+    - /home/iani/dev/blog-backend
+    - /home/iani/dev/Teamlyf-Frontend-Next
 startuppopupversion: 5
 lastversion: 0.43.1
 customcommandshistory:
@@ -21,7 +27,7 @@ customcommandshistory:
     - update
 hidecommandlog: false
 ignorewhitespaceindiffview: false
-diffcontextsize: 2
+diffcontextsize: 1
 renamesimilaritythreshold: 45
 localbranchsortorder: recency
 remotebranchsortorder: alphabetical
