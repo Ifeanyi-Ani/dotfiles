@@ -1,19 +1,21 @@
 lastupdatecheck: 0
 recentrepos:
-    - /home/iani/dev/tumblr-blog
-    - /home/iani/dev/withread-backend
-    - /home/iani/dev/withread-prac
+    - /home/iani/dev/euron-accessment
+    - /home/iani/dev/withread
     - /home/iani/dev/withread-local
     - /home/iani/dev/ifeanyi
-    - /home/iani/dev/withread
+    - /home/iani/dev/qitchen
     - /home/iani/dev/orbis-backend
+    - /home/iani/dev/emmy-notes
+    - /home/iani/dev/testing-noones
+    - /home/iani/dev/tumblr-blog
+    - /home/iani/dev/blog-backend
+    - /home/iani/dev/withread-prac
     - /home/iani/dev/orbis
     - /home/iani/dev/settleinn
     - /home/iani/dev/tanqua
     - /home/iani/dev/react-native-fun
     - /home/iani/dev/buymax
-    - /home/iani/Documents/notes
-    - /home/iani/dev/blog-backend
     - /home/iani/dev/Teamlyf-Frontend-Next
 startuppopupversion: 5
 lastversion: 0.43.1

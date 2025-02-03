@@ -1,5 +1,5 @@
 import = [
-    "~/.config/alacritty/themes/themes/night_owl.toml"
+    "~/.config/alacritty/themes/themes/coolnight.toml"
 ]
 
 [env]
@@ -18,7 +18,7 @@ history = 1000
 
 [font]
 normal.family = "MesloLGLDZ Nerd Font"
-size = 14
+size = 8
 
 # Add bold and italic variants for better code readability
 bold = { family = "MesloLGLDZ Nerd Font", style = "Bold" }
@@ -35,32 +35,12 @@ style = { shape = "Block", blinking = "On" }
 blink_interval = 750
 unfocused_hollow = true
 
-# Key bindings for common operations
-[[keyboard.bindings]]
-key = "V"
-mods = "Control|Shift"
-action = "Paste"
-
-[[keyboard.bindings]]
-key = "C"
-mods = "Control|Shift"
-action = "Copy"
-
 # Mouse configuration for better selection
 [mouse]
 hide_when_typing = true
 
-# Selection configuration
-[selection]
-save_to_clipboard = true
-semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+# # Performance tweaks
+# [debug]
+# render_timer = false
+# persistent_logging = false
 
-# Performance tweaks
-[debug]
-render_timer = false
-persistent_logging = false
-
-# Better bell configuration for notifications
-[bell]
-animation = "EaseOutExpo"
-duration = 0

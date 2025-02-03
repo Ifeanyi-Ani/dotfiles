@@ -17,10 +17,14 @@ gui:
       - "#282A36" # bg-color
     unstagedChangesColor:
       - "#FF5555" # urgent-bg-color
+    showListFooter: true
+    showRandomTip: true
+    showBottomLine: true
   nerdFontsVersion: "3"
   showIcons: true
   showFileTree: true
   expandFocusedSidePanel: true
+  sidePanelWidth: 0.3333
   mainPanelSplitMode: "flexible"
   language: "en"
   timeFormat: "02 Jan 06 15:04 MST"
@@ -49,24 +53,29 @@ git:
     withread:
       pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
       replace: "[$1] "
+    withread-local:
+      pattern: "\\w+\\/(\\w+[^-]*-[^-]*)"
+      replace: "[$1] "
   autoFetch: true
   branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
   allBranchesLogCmd: "git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium"
   overrideGpg: false
-  disableForcePushing: false
+  disableForcePushing: true
 os:
   editCommand: "nvim"
   editCommandTemplate: "{{editor}} {{filename}}"
   openCommand: "xdg-open {{filename}}"
 refresher:
-  refreshInterval: 10
-  fetchInterval: 60
+  refreshInterval: 3
+  fetchInterval: 300
 update:
   method: prompt
   days: 14
 reporting: "on"
+notARepository: "skip"
 confirmOnQuit: false
 quitOnTopLevelReturn: false
+promptToReturnFromSubprocess: false
 keybinding:
 customCommands:
   - key: "b"
@@ -96,6 +105,28 @@ customCommands:
     command: "git checkout -b {{ index .PromptResponses 0 }}/{{ index .PromptResponses 1 }}"
     context: "localBranches"
     loadingText: "creating branch"
+  - key: "<c-t>"
+    context: "files"
+    prompts:
+      - type: "menu"
+        title: "Select commit type"
+        options:
+          - name: "✨ feat: New feature"
+            value: "feat"
+          - name: "🐛 fix: Bug fix"
+            value: "fix"
+          - name: "♻️ refactor: Code refactoring"
+            value: "refactor"
+          - name: "📝 docs: Documentation"
+            value: "docs"
+          - name: "✅ test: Testing"
+            value: "test"
+          - name: "⚡ perf: Performance"
+            value: "perf"
+      - type: "input"
+        title: "Enter commit message"
+    command: 'git commit -m "{{index .PromptResponses 0}}: {{index .PromptResponses 1}}"'
+    loadingText: "creating commit..."
   - key: "C"
     command: "git cz"
     context: "files"
@@ -106,5 +137,3 @@ customCommands:
     context: "global"
     loadingText: "Fetching"
     description: "fetch from all remotes"
-notARepository: "prompt"
-promptToReturnFromSubprocess: true
