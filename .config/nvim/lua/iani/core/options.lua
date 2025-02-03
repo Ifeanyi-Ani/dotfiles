@@ -35,12 +35,10 @@ opt.wrap = false -- No line wrapping
 -- Search settings
 opt.ignorecase = true -- Ignore case when searching
 opt.smartcase = true -- If you include mixed case in your search, assumes you want case-sensitive
-opt.incsearch = true -- Show search matches as you type
 opt.hlsearch = false -- Don't highlight all matches
 
 -- Better colors
 opt.termguicolors = true -- True color support
-opt.background = "dark" -- Dark mode
 
 -- Improved window splitting
 opt.splitright = true -- Split vertical window to the right
@@ -51,12 +49,10 @@ opt.splitkeep = "screen" -- Maintain code view when splitting
 opt.clipboard:append("unnamedplus") -- Use system clipboard
 opt.mouse = "a" -- Enable mouse for all modes
 
--- Better backspace behavior
-opt.backspace = "indent,eol,start"
-
 -- File handling
+opt.scrolloff = 10
+opt.sidescrolloff = 8
 opt.fileencoding = "utf-8" -- Use UTF-8 encoding
-opt.backup = false -- Don't create backup files
 opt.writebackup = false -- Don't create backup before overwriting file
 opt.undofile = true -- Enable persistent undo
 
@@ -66,9 +62,6 @@ if vim.fn.isdirectory(undodir) == 0 then
   vim.fn.mkdir(undodir, "p")
 end
 opt.undodir = undodir
-
--- Buffer management
-opt.hidden = true -- Keep buffers loaded
 
 -- Better completion experience
 opt.completeopt = "menu,menuone,noselect"

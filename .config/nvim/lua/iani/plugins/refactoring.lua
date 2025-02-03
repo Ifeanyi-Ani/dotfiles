@@ -15,7 +15,25 @@ return {
       { "<leader>rb", ":Refactor extract_block", mode = "n", desc = "Extract block" },
       { "<leader>rf", ":Refactor extract_block_to_file", mode = "n", desc = "Extract block to file" },
     },
-    config = true,
+    config = function()
+      require("refactoring").setup({
+        printf_statements = {},
+        extract_to_file = {
+          default_path = function(file_path)
+            return vim.fn.fnamemodify(file_path, ":h")
+          end,
+        },
+        -- Configure the prompt behavior
+        prompt_func_return_type = {
+          javascript = true,
+          typescript = true,
+        },
+        prompt_func_param_type = {
+          javascript = true,
+          typescript = true,
+        },
+      })
+    end,
   },
   {
     "smjonas/inc-rename.nvim",

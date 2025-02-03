@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({ { import = "iani.plugins" }, { import = "iani.plugins.lsp" } }, {
   install = {
-    colorscheme = { "night-owl" },
+    colorscheme = { "tokyonight" },
     notify = {
       enable = true,
       severity = {

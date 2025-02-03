@@ -31,33 +31,14 @@ return {
           height = 0.80,
           preview_cutoff = 120,
         },
-        mappings = {
-          i = {
-            ["<C-k>"] = actions.move_selection_previous,
-            ["<C-j>"] = actions.move_selection_next,
-            ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-            ["<esc>"] = actions.close,
-            ["<CR>"] = actions.select_default + actions.center,
-          },
-        },
         file_ignore_patterns = { "node_modules" },
-        vimgrep_arguments = {
-          "rg",
-          "--color=never",
-          "--no-heading",
-          "--with-filename",
-          "--line-number",
-          "--column",
-          "--smart-case",
-          "--hidden",
-        },
       },
       pickers = {
         find_files = {
           hidden = true,
         },
         buffers = {
-          previewer = false,
+          previewer = true,
           layout_config = {
             width = 80,
           },
@@ -66,7 +47,7 @@ return {
           prompt_title = "Recent Files",
         },
         lsp_references = {
-          previewer = false,
+          previewer = true,
         },
       },
       extensions = {
@@ -77,15 +58,13 @@ return {
           case_mode = "smart_case",
         },
         ["ui-select"] = {
-          require("telescope.themes").get_dropdown({
-            -- even more opts
-          }),
+          require("telescope.themes").get_dropdown({}),
         },
         live_grep_args = {
           auto_quoting = true,
           mappings = {
             i = {
-              ["<C-k>"] = lga_actions.quote_prompt(),
+              ["<C-a>"] = lga_actions.quote_prompt(),
               ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
             },
           },
@@ -100,7 +79,6 @@ return {
     local keymap = vim.keymap
     keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
     keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
-    keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Fuzzy find buffers" })
     keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep_args<cr>", { desc = "Find string in cwd" })
     keymap.set("n", "<leader>fS", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
     keymap.set("n", "<leader>fc", "<cmd>Telescope commands<cr>", { desc = "Find commands" })
@@ -111,5 +89,18 @@ return {
     keymap.set("n", "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Find in buffer" })
     keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Find help" })
     keymap.set("n", "<leader>fm", "<cmd>Telescope marks<cr>", { desc = "Find marks" })
+    keymap.set("n", "<leader>fb", function()
+      require("telescope.builtin").buffers()
+    end, { desc = "Fuzzy find buffers" })
+    keymap.set("n", "<leader>fP", function()
+      require("telescope.builtin").find_files({
+        cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy"),
+      })
+    end, { desc = "Find Package" })
+    keymap.set("n", "<leader>fp", function()
+      require("telescope.builtin").find_files({
+        cwd = vim.fs.joinpath(vim.fn.stdpath("config"), "lua"),
+      })
+    end, { desc = "Find Plugins" })
   end,
 }

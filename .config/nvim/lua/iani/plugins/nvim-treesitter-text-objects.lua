@@ -35,7 +35,7 @@ return {
       auto_install = true,
       highlight = {
         enable = true,
-        additional_vim_regex_highlighting = false,
+        additional_vim_regex_highlighting = true,
       },
       indent = {
         enable = true,
@@ -122,7 +122,20 @@ return {
         lsp_interop = {
           enable = true,
           border = "none",
-          floating_preview_opts = {},
+          floating_preview_opts = {
+            max_width = 80, -- Maximum width of the preview window
+            max_height = 25, -- Maximum height of the preview window
+            pad_top = 1, -- Padding from top
+            pad_bottom = 1, -- Padding from bottom
+            focusable = true, -- Allow focusing the floating window
+            style = "minimal", -- Minimal window style
+            winhighlight = {
+              Normal = "NormalFloat", -- Default float background
+              FloatBorder = "FloatBorder", -- Border color
+              CursorLine = "CursorLine", -- Cursor line highlight
+              Search = "Search", -- Search highlight
+            },
+          },
           peek_definition_code = {
             ["<leader>df"] = "@function.outer",
             ["<leader>dF"] = "@class.outer",
@@ -163,12 +176,11 @@ return {
     vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
     vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
 
-    -- Enhance folding
-    vim.opt.foldmethod = "expr"
-    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-    vim.opt.foldlevel = 3
-    vim.opt.foldtext =
-      [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend))]]
+    -- vim.opt.foldmethod = "expr"
+    -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    -- vim.opt.foldlevel = 3
+    -- vim.opt.foldtext =
+    --   [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend))]]
 
     -- Optimize Treesitter performance
     vim.g.matchup_matchparen_offscreen = { method = "popup" }
