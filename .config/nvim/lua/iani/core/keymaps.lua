@@ -27,3 +27,19 @@ keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" 
 keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
 keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
+
+-- Flutter-specific keymaps
+keymap.set("n", "<leader>ur", "<cmd>FlutterRun<CR>", { desc = "Flutter Run" })
+keymap.set("n", "<leader>uq", "<cmd>FlutterQuit<CR>", { desc = "Flutter Quit" })
+keymap.set("n", "<leader>ur", "<cmd>FlutterReload<CR>", { desc = "Flutter Hot Reload" })
+keymap.set("n", "<leader>uR", "<cmd>FlutterRestart<CR>", { desc = "Flutter Hot Restart" })
+keymap.set("n", "<leader>uD", "<cmd>FlutterVisualDebug<CR>", { desc = "Flutter Visual Debug" })
+keymap.set("n", "<leader>ud", "<cmd>FlutterDevices<CR>", { desc = "Flutter Devices" })
+keymap.set("n", "<leader>ue", "<cmd>FlutterEmulators<CR>", { desc = "Flutter Emulators" })
+keymap.set("n", "<leader>uc", "<cmd>FlutterLogClear<CR>", { desc = "Flutter Log Clear" })
+keymap.set("n", "<leader>uo", "<cmd>FlutterOutline<CR>", { desc = "Flutter Outline" })
+keymap.set("n", "<leader>us", "<cmd>FlutterScreenshot<CR>", { desc = "Flutter Screenshot" })
+keymap.set("n", "<leader>ul", "<cmd>FlutterLspRestart<CR>", { desc = "Restart Flutter LSP" })
+
+-- Dart-specific keymaps
+keymap.set("n", "<leader>md", "<cmd>DartFmt<CR>", { desc = "Dart Format" })

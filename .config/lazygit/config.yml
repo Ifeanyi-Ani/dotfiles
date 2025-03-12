@@ -38,7 +38,7 @@ git:
     showGraph: "always"
     showWholeGraph: false
   commitPrefixes:
-    tumblr-blog:
+    learning_dart_flutter:
       pattern: "^\\w+\\/(\\w+[^-]*-[^-]*)"
       replace: "[$1] "
     blog-backend:

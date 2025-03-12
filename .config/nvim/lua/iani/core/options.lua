@@ -51,7 +51,7 @@ opt.mouse = "a" -- Enable mouse for all modes
 
 -- File handling
 opt.scrolloff = 10
-opt.sidescrolloff = 8
+opt.sidescrolloff = 10
 opt.fileencoding = "utf-8" -- Use UTF-8 encoding
 opt.writebackup = false -- Don't create backup before overwriting file
 opt.undofile = true -- Enable persistent undo

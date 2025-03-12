@@ -144,6 +144,9 @@ return {
             },
           })
         end,
+        ["dartls"] = function()
+          -- We don't need to set up dartls separately as flutter-tools.nvim will handle it
+        end,
       })
     end,
   },

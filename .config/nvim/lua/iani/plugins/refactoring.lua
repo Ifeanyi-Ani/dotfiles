@@ -27,11 +27,38 @@ return {
         prompt_func_return_type = {
           javascript = true,
           typescript = true,
+          dart = true, -- Add Dart support
         },
         prompt_func_param_type = {
           javascript = true,
           typescript = true,
+          dart = true, -- Add Dart support
         },
+        -- Add Dart-specific refactoring options
+        print_var_statements = {
+          dart = {
+            'print("${} = ${}");',
+          },
+        },
+      })
+
+      -- Add Dart-specific keymaps
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "dart",
+        callback = function()
+          vim.keymap.set(
+            "v",
+            "<leader>rem",
+            [[:Refactor extract_method<CR>]],
+            { noremap = true, silent = true, buffer = true, desc = "Extract method" }
+          )
+          vim.keymap.set(
+            "v",
+            "<leader>rec",
+            [[:Refactor extract_class<CR>]],
+            { noremap = true, silent = true, buffer = true, desc = "Extract class" }
+          )
+        end,
       })
     end,
   },
@@ -50,6 +77,27 @@ return {
         expr = true,
       },
     },
-    config = true,
+    config = function()
+      require("inc_rename").setup({
+        cmd_name = "IncRename", -- the name of the command
+        hl_group = "Substitute", -- the highlight group used for highlighting the identifier's new name
+        preview_empty_name = false, -- whether an empty new name should be previewed; if false the command preview will be cancelled instead
+        show_message = true, -- whether to display a `Renamed m instances in n files` message after a rename operation
+        input_buffer_type = "dressing", -- the type of the external input buffer to use (the only supported value is currently "dressing")
+        post_hook = nil, -- callback to run after renaming, receives the result table (from LSP rename) as an argument
+      })
+
+      -- Add Dart-specific rename functionality
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "dart",
+        callback = function()
+          vim.keymap.set("n", "<leader>rw", function()
+            local word = vim.fn.expand("<cword>")
+            local pascal_case = word:gsub("^%l", string.upper)
+            return ":IncRename " .. pascal_case
+          end, { noremap = true, expr = true, buffer = true, desc = "Rename to PascalCase" })
+        end,
+      })
+    end,
   },
 }

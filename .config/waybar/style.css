@@ -1,0 +1,165 @@
+/* Dracula theme colors */
+@define-color background #282a36;
+@define-color current-line #44475a;
+@define-color selection #44475a;
+@define-color foreground #f8f8f2;
+@define-color comment #6272a4;
+@define-color cyan #8be9fd;
+@define-color green #50fa7b;
+@define-color orange #ffb86c;
+@define-color pink #ff79c6;
+@define-color purple #bd93f9;
+@define-color red #ff5555;
+@define-color yellow #f1fa8c;
+
+* {
+  font-family: "MesloLGM Nerd Font", "Font Awesome 6 Free";
+  font-size: 14px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: alpha(@background, 0.95);
+  color: @foreground;
+  border-radius: 10px;
+  border: 2px solid alpha(@purple, 0.5);
+}
+
+#workspaces {
+  background: alpha(@current-line, 0.6);
+  border-radius: 10px;
+  margin: 5px;
+  padding: 0 5px;
+}
+
+#workspaces button {
+  padding: 0 7px;
+  color: @foreground;
+  border-radius: 10px;
+  margin: 5px 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+#workspaces button:hover {
+  background: alpha(@purple, 0.6);
+  color: @background;
+  border-radius: 10px;
+}
+
+#workspaces button.focused {
+  background: @purple;
+  color: @background;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+}
+
+#workspaces button.urgent {
+  background: @red;
+  color: @background;
+  border-radius: 10px;
+}
+
+#mode {
+  background: @red;
+  color: @background;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 0 10px;
+}
+
+#window {
+  margin: 5px;
+  padding: 0 10px;
+  border-radius: 10px;
+  color: @foreground;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio,
+#custom-power,
+#tray {
+  background: alpha(@current-line, 0.6);
+  padding: 0 12px;
+  margin: 5px 2px;
+  border-radius: 10px;
+  color: @foreground;
+}
+
+#clock {
+  color: @green;
+}
+
+#battery {
+  color: @cyan;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: @green;
+}
+
+#battery.critical:not(.charging) {
+  color: @red;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes blink {
+  to {
+    background-color: @red;
+    color: @background;
+  }
+}
+
+#cpu {
+  color: @pink;
+}
+
+#memory {
+  color: @purple;
+}
+
+#network {
+  color: @yellow;
+}
+
+#network.disconnected {
+  color: @red;
+}
+
+#pulseaudio {
+  color: @orange;
+}
+
+#pulseaudio.muted {
+  color: @red;
+}
+
+#temperature {
+  color: @green;
+}
+
+#temperature.critical {
+  color: @red;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}
+
+#custom-power {
+  color: @red;
+  margin-right: 5px;
+}

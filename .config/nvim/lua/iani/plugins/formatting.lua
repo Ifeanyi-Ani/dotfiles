@@ -4,7 +4,6 @@ return {
   cmd = { "ConformInfo" },
   keys = {
     {
-      -- Customize or remove this keymap to your liking
       "<leader>mf",
       function()
         require("conform").format({ async = true })
@@ -13,11 +12,7 @@ return {
       desc = "Format buffer",
     },
   },
-  -- This will provide type hinting with LuaLS
-  ---@module "conform"
-  ---@type conform.setupOpts
   opts = {
-    -- Define your formatters
     formatters_by_ft = {
       javascript = { "prettierd" },
       typescript = { "prettierd" },
@@ -33,18 +28,16 @@ return {
       liquid = { "prettierd" },
       lua = { "stylua" },
       python = { "isort", "black" },
+      dart = { "dart_format" }, -- Add Dart formatter
     },
-    -- Set default options
     default_format_opts = {
       lsp_format = "fallback",
     },
-    -- Set up format-on-save
     format_on_save = {
       timeout_ms = 2500,
       lsp_fallback = true,
       async = false,
     },
-    -- Customize formatters
     formatters = {
       shfmt = {
         prepend_args = { "-i", "2" },
@@ -52,10 +45,32 @@ return {
       prettier = {
         prepend_args = { "--prose-wrap", "always" },
       },
+      dart_format = {
+        command = "dart",
+        args = { "format" },
+      },
     },
   },
   init = function()
-    -- If you want the formatexpr, here is the place to set it
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+    -- Add Flutter-specific formatting
+    local flutter_tools_ok, flutter_tools = pcall(require, "flutter-tools")
+    if flutter_tools_ok then
+      flutter_tools.setup({
+        lsp = {
+          on_attach = function(client, bufnr)
+            if client.server_capabilities.documentFormattingProvider then
+              vim.api.nvim_create_autocmd("BufWritePre", {
+                buffer = bufnr,
+                callback = function()
+                  vim.lsp.buf.format({ async = false })
+                end,
+              })
+            end
+          end,
+        },
+      })
+    end
   end,
 }

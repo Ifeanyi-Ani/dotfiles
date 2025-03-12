@@ -17,6 +17,8 @@ return {
     "rafamadriz/friendly-snippets",
     "onsails/lspkind.nvim",
     "windwp/nvim-autopairs",
+    -- Add Flutter snippets
+    "Nash0x7E2/awesome-flutter-snippets",
   },
   config = function()
     local cmp = require("cmp")
@@ -111,6 +113,25 @@ return {
               return false
             elseif entry1_under < entry2_under then
               return true
+            end
+          end,
+          -- Add a custom comparator for Flutter/Dart completions
+          function(entry1, entry2)
+            local kind1 = entry1:get_kind()
+            local kind2 = entry2:get_kind()
+            if kind1 ~= kind2 then
+              if kind1 == cmp.lsp.CompletionItemKind.Class then
+                return true
+              end
+              if kind2 == cmp.lsp.CompletionItemKind.Class then
+                return false
+              end
+              if kind1 == cmp.lsp.CompletionItemKind.Method then
+                return true
+              end
+              if kind2 == cmp.lsp.CompletionItemKind.Method then
+                return false
+              end
             end
           end,
           cmp.config.compare.kind,

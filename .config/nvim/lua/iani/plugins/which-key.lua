@@ -27,6 +27,7 @@ return {
       { "<leader>c", group = "Actions" },
       { "<leader>o", group = "Obsidian" },
       { "<leader>h", group = "Harpoon" },
+      { "<leader>u", group = "Flutter" },
     })
   end,
 }
