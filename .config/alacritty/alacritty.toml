@@ -1,5 +1,5 @@
 import = [
-    "~/.config/alacritty/themes/themes/rose-pine-moon.toml"
+    "~/.config/alacritty/themes/themes/night_owl.toml"
 ]
 
 [env]
@@ -7,6 +7,7 @@ TERM = "xterm-256color"
 
 [window]
 decorations = "none"
+# opacity=0.8
 
 # Add dynamic padding for better readability
 padding = { x = 5, y = 5 }

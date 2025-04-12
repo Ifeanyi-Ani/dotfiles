@@ -4,8 +4,8 @@
     "height": 30,
     "spacing": 4,
     "margin-top": 3,
-    "margin-left": 10,
-    "margin-right": 10,
+    "margin-left": 2,
+    "margin-right": 2,
     
     "modules-left": [
         "sway/workspaces",
@@ -18,18 +18,17 @@
     ],
     
     "modules-right": [
-        "tray",
         "pulseaudio",
         "network",
         "cpu",
         "memory",
         "temperature",
         "battery",
-        "custom/power"
+        "tray",
     ],
     
     "sway/workspaces": {
-        "disable-scroll": true,
+        "disable-scroll": false,
         "all-outputs": true,
         "format": "{name}",
         "format-icons": {
@@ -38,10 +37,10 @@
             "3:Browser": "",
             "4:Files": "",
             "5:Media": "",
-            "6:Discord": "ﭮ",
+            "6:Discord": "",
             "7:Slack": "",
             "8:Telegram": "",
-            "9": "9",
+            "9": "",
             "10:External": "",
             "urgent": "",
             "focused": "",
@@ -63,11 +62,18 @@
         "icon-size": 16,
         "spacing": 10
     },
-    
+
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%a, %d %b %H:%M}",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-alt": "{:%Y-%m-%d}",
+        "calendar": {
+          "mode": "month",
+          "on-click-right": "mode",
+          "format": {
+            "today": "<span color='#ffb86c' font='20px'><b>{}</b></span>",
+          }
+        }
     },
     
     "cpu": {

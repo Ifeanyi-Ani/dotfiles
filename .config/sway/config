@@ -4,29 +4,36 @@
 # Set mod key (Mod1=Alt, Mod4=Super)
 set $mod Mod1
 set $pm LVDS-1
-set $sm VGA-1
+# set $sm VGA-1
 
 # Font for window titles and bar
 font pango:MesloLGM Nerd Font 14
 
 # Autostart applications
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+  dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 # Configure displays
 # Note: Use `wlr-randr` or `swaymsg -t get_outputs` to get proper output names
 output LVDS-1 {
     mode 1366x768
     position 0,0
+    adaptive_sync on
+    # bg ~/Downloads/wallpaper-master/first-collection/macos.png fill
     # primary
 }
 
-output VGA-1 {
-    mode 1280x1024
-    position -1280,0
-}
+# output VGA-1 {
+#     mode 1920x1080
+#     position -1920,0
+# }
+
+
 
 # Built-in wallpaper functionality (replaces feh)
-# output * bg ~/Downloads/wallpaper-master/second-collection/* fill
+# output * bg ~/Downloads/wallpaper-master/second-collection/waves/dracula-waves-44475a.png fill
+exec_always pkill swaybg || true && swaybg -i ~/Downloads/wallpaper-master/second-collection/waves/dracula-waves-44475a.png -m fill
 
 # Keyboard layout (replaces setxkbmap)
 input * {
@@ -35,7 +42,7 @@ input * {
 
 # Auto-tiling is built into sway
 # Notification daemon
-exec_always pkill dunst; dunst -conf ~/.config/dunst/dunstrc &
+exec_always pkill mako || true && mako
 
 # Status bar (using waybar instead of polybar)
 # exec_always pkill waybar; waybar &
@@ -47,8 +54,6 @@ exec_always {
 # Auto-tiling
 exec_always /bin/autotilling.py
 
-# Fallback background color
-output * bg #44475a solid_color
 
 # Network manager applet
 exec nm-applet --indicator
@@ -65,6 +70,9 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Toggle between extend and duplicate display modes
+# bindsym $mod+Shift+m exec ~/.config/sway/scripts/toggle-display-mode.sh
 
 # Brightness controls
 bindsym XF86MonBrightnessUp exec brightnessctl set +10%
@@ -136,17 +144,30 @@ bindsym $mod+a focus parent
 # Focus the child container
 bindsym $mod+p focus child
 
-# Workspace output assignments
-workspace 1 output $pm
-workspace 2 output $pm
-workspace 3 output $pm
-workspace 4 output $pm
-workspace 5 output $pm
-workspace 6 output $pm
-workspace 7 output $pm
-workspace 8 output $pm
-workspace 9 output $pm
-workspace 10 output $sm
+# Notification controls
+bindsym $mod+n exec makoctl dismiss # Dismiss all notifications
+bindsym $mod+Shift+n exec makoctl dismiss -a # Dismiss all notifications
+bindsym $mod+grave exec makoctl restore # Restore the last dismissed notification
+bindsym $mod+Shift+grave exec makoctl menu dmenu # Show notification actions menu using rofi
+
+# Increase gaps
+bindsym $mod+Shift+equal exec swaymsg gaps inner all plus 2 && swaymsg gaps outer all plus 2
+# Decrease gaps
+bindsym $mod+Shift+minus exec swaymsg gaps inner all minus 2 && swaymsg gaps outer all minus 2
+# Reset gaps to default
+bindsym $mod+Shift+d exec swaymsg gaps inner all set 2 && swaymsg gaps outer all set 2
+
+# # Workspace output assignments
+# workspace 1 output $pm
+# workspace 2 output $pm
+# workspace 3 output $pm
+# workspace 4 output $pm
+# workspace 5 output $pm
+# workspace 6 output $pm
+# workspace 7 output $pm
+# workspace 8 output $pm
+# workspace 9 output $pm
+# workspace 10 output $sm
 
 # Define workspace names
 set $ws1 "1:Terminal"
@@ -188,7 +209,7 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+r reload
 
 # Exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e exec swaymsg exit
 
 # Resize window
 mode "resize" {
@@ -219,21 +240,33 @@ client.focused          $focus-color $focus-color $text-color          $focus-co
 client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color $inactive-bg-color   $inactive-bg-color 
 client.unfocused        $bg-color $bg-color $inactive-text-color $bg-color   $bg-color
 
-# Gaps configuration
-gaps inner 8
-gaps outer 8
 
 # Window rules
 default_border pixel 2
 for_window [app_id=".*"] border pixel 2
-for_window [app_id="pavucontrol"] floating enable
+for_window [class="Postman"] floating enable, resize set 1000 800
+for_window [class="Emulator"] floating enable
+for_window [app_id="pavucontrol"] floating enable, resize set 800 600
+for_window [app_id="nm-connection-editor"] floating enable
+for_window [app_id="blueberry.py"] floating enable
+for_window [app_id="org.gnome.Calculator"] floating enable, resize set 400 600
 for_window [app_id="Conky"] sticky enable
+for_window [title="Picture-in-Picture"] floating enable, sticky enable
+for_window [title="Firefox — Sharing Indicator"] floating enable, sticky enable
+for_window [app_id="wdisplays"] floating enable, resize set 950 540
+for_window [app_id="imv"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_type="dialog"] floating enable
 
 # Additional controls
 bindsym $mod+shift+v exec pavucontrol
-# Sway screenshot (replaces maim)
-bindsym $mod+Pause exec grim ~/Pictures/screenshots/pic-$(date +%Y-%m-%d-%H:%M:%S).png
-bindsym Pause exec grim -g "$(slurp)" ~/Pictures/screenshots/slurp-$(date +%Y-%m-%d-%H:%M:%S).png
+# Sway screenshots
+bindsym $mod+Pause exec grim ~/Pictures/screenshots/full-$(date +%Y-%m-%d-%H%M%S).png && notify-send "Screenshot Captured" "Saved to ~/Pictures/screenshots"
+bindsym Pause exec grim -g "$(slurp)" ~/Pictures/screenshots/area-$(date +%Y-%m-%d-%H%M%S).png && notify-send "Area Screenshot" "Saved to ~/Pictures/screenshots"
+# bindsym $mod+Shift+Pause exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" ~/Pictures/screenshots/window-$(date +%Y-%m-%d-%H%M%S).png && notify-send "Window Screenshot" "Saved to ~/Pictures/screenshots"
+bindsym $mod+Shift+F10 exec wf-recorder -g "$(slurp)" -f ~/Videos/screencast-$(date +'%Y-%m-%d-%H%M%S').mp4
 
 # Simple scratchpad with current terminal
 bindsym $mod+Shift+period move scratchpad

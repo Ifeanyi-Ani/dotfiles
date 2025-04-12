@@ -163,3 +163,18 @@ window#waybar {
   color: @red;
   margin-right: 5px;
 }
+
+tooltip {
+  background: @background;
+  border: 2px solid @purple;
+  border-radius: 10px;
+}
+
+tooltip label {
+  color: @foreground;
+}
+
+tooltip * {
+  padding: 0;
+  margin: 0;
+}
