@@ -176,13 +176,13 @@ return {
     vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
     vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
 
-    -- vim.opt.foldmethod = "expr"
-    -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    vim.opt.foldmethod = "expr"
+    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
     -- vim.opt.foldlevel = 3
     -- vim.opt.foldtext =
     --   [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend))]]
 
     -- Optimize Treesitter performance
-    vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    -- vim.g.matchup_matchparen_offscreen = { method = "popup" }
   end,
 }

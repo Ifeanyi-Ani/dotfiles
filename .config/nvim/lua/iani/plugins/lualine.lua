@@ -64,6 +64,8 @@ return {
         theme = my_lualine_theme,
       },
       sections = {
+        lualine_c = { "lsp_progress" },
+        lualine_y = { "tabnine" },
         lualine_x = {
           {
             lazy_status.updates,
@@ -74,6 +76,14 @@ return {
           { "fileformat" },
           { "filetype" },
         },
+      },
+      tabline = {
+        lualine_a = {},
+        lualine_b = { "branch" },
+        lualine_c = { "filename" },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
       },
     })
   end,

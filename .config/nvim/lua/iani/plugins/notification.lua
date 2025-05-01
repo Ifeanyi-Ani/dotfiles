@@ -4,16 +4,8 @@ return {
     event = "VeryLazy",
     opts = {
       background_colour = "#000000",
-      fps = 30,
-      icons = {
-        DEBUG = "",
-        ERROR = "",
-        INFO = "",
-        TRACE = "✎",
-        WARN = "",
-      },
       level = 2,
-      minimum_width = 50,
+      minimum_width = 25,
       render = "default",
       stages = "fade_in_slide_out",
       timeout = 5000,
@@ -27,48 +19,110 @@ return {
     end,
   },
   {
-    "ray-x/lsp_signature.nvim",
+    "folke/noice.nvim",
     event = "VeryLazy",
+
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+    },
     opts = {
-      bind = true,
-      doc_lines = 2,
-      floating_window = true,
-      fix_pos = true,
-      hint_enable = true,
-      hint_prefix = "🐼 ",
-      hint_scheme = "String",
-      hi_parameter = "Search",
-      max_height = 22,
-      max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
-      handler_opts = {
-        border = "rounded", -- double, single, shadow, none
+      messages = { enabled = false },
+      lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+          ["vim.lsp.util.stylize_markdown"] = false,
+          ["cmp.entry.get_documentation"] = true,
+        },
+        progress = {
+          enabled = false,
+        },
+        hover = {
+          enabled = false,
+        },
       },
-      zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
-      padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
+      presets = {
+        bottom_search = true,
+        command_palette = true,
+        long_message_to_split = true,
+      },
+    },
+    keys = {
+      { "<leader>nn", "", desc = "+noice" },
+      {
+        "<S-Enter>",
+        function()
+          require("noice").redirect(vim.fn.getcmdline())
+        end,
+        mode = "c",
+        desc = "Redirect Cmdline",
+      },
+      {
+        "<leader>nnl",
+        function()
+          require("noice").cmd("last")
+        end,
+        desc = "Noice Last Message",
+      },
+      {
+        "<leader>nnh",
+        function()
+          require("noice").cmd("history")
+        end,
+        desc = "Noice History",
+      },
+      {
+        "<leader>nna",
+        function()
+          require("noice").cmd("all")
+        end,
+        desc = "Noice All",
+      },
+      {
+        "<leader>nnd",
+        function()
+          require("noice").cmd("dismiss")
+        end,
+        desc = "Dismiss All",
+      },
+      {
+        "<leader>nnt",
+        function()
+          require("noice").cmd("pick")
+        end,
+        desc = "Noice Picker (Telescope/FzfLua)",
+      },
+      {
+        "<c-f>",
+        function()
+          if not require("noice.lsp").scroll(4) then
+            return "<c-f>"
+          end
+        end,
+        silent = true,
+        expr = true,
+        desc = "Scroll Forward",
+        mode = { "i", "n", "s" },
+      },
+      {
+        "<c-b>",
+        function()
+          if not require("noice.lsp").scroll(-4) then
+            return "<c-b>"
+          end
+        end,
+        silent = true,
+        expr = true,
+        desc = "Scroll Backward",
+        mode = { "i", "n", "s" },
+      },
     },
     config = function(_, opts)
-      require("lsp_signature").setup(opts)
-    end,
-  },
-  {
-    "folke/noice.nvim",
-    enabled = false, -- Disable noice.nvim
-  },
-  {
-    "echasnovski/mini.notify",
-    event = "VeryLazy",
-    config = function()
-      require("mini.notify").setup({
-        -- Customize as needed
-        lsp_progress = {
-          enable = true,
-          format = "lsp_progress",
-        },
-        cmdline = {
-          enable = true,
-          format = "cmdline",
-        },
-      })
+      if vim.o.filetype == "lazy" then
+        vim.cmd([[messages clear]])
+      end
+      require("noice").setup(opts)
     end,
   },
 }

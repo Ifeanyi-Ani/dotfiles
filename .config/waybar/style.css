@@ -1,180 +1,141 @@
-/* Dracula theme colors */
-@define-color background #282a36;
-@define-color current-line #44475a;
-@define-color selection #44475a;
-@define-color foreground #f8f8f2;
-@define-color comment #6272a4;
-@define-color cyan #8be9fd;
-@define-color green #50fa7b;
-@define-color orange #ffb86c;
-@define-color pink #ff79c6;
-@define-color purple #bd93f9;
-@define-color red #ff5555;
-@define-color yellow #f1fa8c;
-
 * {
-  font-family: "MesloLGM Nerd Font", "Font Awesome 6 Free";
-  font-size: 14px;
-  min-height: 0;
+  font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+  font-size: 13px;
+  font-weight: bold;
 }
 
 window#waybar {
-  background: alpha(@background, 0.95);
-  color: @foreground;
+  background-color: rgba(30, 30, 46, 0.5);
+  color: #cdd6f4;
   border-radius: 10px;
-  border: 2px solid alpha(@purple, 0.5);
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
 }
 
 #workspaces {
-  background: alpha(@current-line, 0.6);
+  background-color: transparent;
   border-radius: 10px;
-  margin: 5px;
   padding: 0 5px;
 }
 
 #workspaces button {
-  padding: 0 7px;
-  color: @foreground;
+  color: #cba6f7;
+  padding: 0 5px;
+  background: transparent;
+  border-radius: 8px;
+  margin: 4px 3px;
+}
+
+#workspaces button.active {
+  color: #cdd6f4;
+  background: #7aa2f7;
   border-radius: 10px;
-  margin: 5px 2px;
-  transition: all 0.3s ease-in-out;
 }
 
 #workspaces button:hover {
-  background: alpha(@purple, 0.6);
-  color: @background;
+  background: rgba(122, 162, 247, 0.3);
+  color: #cdd6f4;
   border-radius: 10px;
 }
 
-#workspaces button.focused {
-  background: @purple;
-  color: @background;
+#custom-launcher {
+  background-color: #7aa2f7;
+  color: #1e1e2e;
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
-}
-
-#workspaces button.urgent {
-  background: @red;
-  color: @background;
-  border-radius: 10px;
-}
-
-#mode {
-  background: @red;
-  color: @background;
-  border-radius: 10px;
-  margin: 5px;
+  margin: 4px 3px;
   padding: 0 10px;
 }
 
 #window {
-  margin: 5px;
+  background-color: transparent;
   padding: 0 10px;
+  margin: 4px 3px;
   border-radius: 10px;
-  color: @foreground;
-}
-
-#clock,
-#battery,
-#cpu,
-#memory,
-#temperature,
-#network,
-#pulseaudio,
-#custom-power,
-#tray {
-  background: alpha(@current-line, 0.6);
-  padding: 0 12px;
-  margin: 5px 2px;
-  border-radius: 10px;
-  color: @foreground;
 }
 
 #clock {
-  color: @green;
-}
-
-#battery {
-  color: @cyan;
-}
-
-#battery.charging,
-#battery.plugged {
-  color: @green;
-}
-
-#battery.critical:not(.charging) {
-  color: @red;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-@keyframes blink {
-  to {
-    background-color: @red;
-    color: @background;
-  }
-}
-
-#cpu {
-  color: @pink;
-}
-
-#memory {
-  color: @purple;
+  background-color: #7aa2f7;
+  color: #1e1e2e;
+  border-radius: 10px;
+  margin: 4px 3px;
+  padding: 0 10px;
 }
 
 #network {
-  color: @yellow;
-}
-
-#network.disconnected {
-  color: @red;
+  background-color: #f9e2af;
+  color: #1e1e2e;
+  border-radius: 10px;
+  margin: 4px 3px;
+  padding: 0 10px;
 }
 
 #pulseaudio {
-  color: @orange;
+  background-color: #fab387;
+  color: #1e1e2e;
+  border-radius: 10px;
+  margin: 4px 3px;
+  padding: 0 10px;
 }
 
-#pulseaudio.muted {
-  color: @red;
+#battery {
+  background-color: #a6e3a1;
+  color: #1e1e2e;
+  border-radius: 10px;
+  margin: 4px 3px;
+  padding: 0 10px;
+}
+
+#battery.warning {
+  background-color: #f9e2af;
+}
+
+#battery.critical {
+  background-color: #f38ba8;
+}
+
+#cpu {
+  background-color: #89b4fa;
+  color: #1e1e2e;
+  border-radius: 10px;
+  margin: 4px 3px;
+  padding: 0 10px;
+}
+
+#memory {
+  background-color: #cba6f7;
+  color: #1e1e2e;
+  border-radius: 10px;
+  margin: 4px 3px;
+  padding: 0 10px;
 }
 
 #temperature {
-  color: @green;
+  background-color: #f5c2e7;
+  color: #1e1e2e;
+  border-radius: 10px;
+  margin: 4px 3px;
+  padding: 0 10px;
 }
 
 #temperature.critical {
-  color: @red;
+  background-color: #f38ba8;
 }
 
-#tray > .passive {
-  -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-  -gtk-icon-effect: highlight;
+#tray {
+  background-color: rgba(30, 30, 46, 0.6);
+  border-radius: 10px;
+  margin: 4px 3px;
+  padding: 0 10px;
 }
 
 #custom-power {
-  color: @red;
-  margin-right: 5px;
-}
-
-tooltip {
-  background: @background;
-  border: 2px solid @purple;
+  background-color: #f38ba8;
+  color: #1e1e2e;
   border-radius: 10px;
-}
-
-tooltip label {
-  color: @foreground;
-}
-
-tooltip * {
-  padding: 0;
-  margin: 0;
+  margin: 4px 3px 4px 3px;
+  padding: 0 10px;
 }

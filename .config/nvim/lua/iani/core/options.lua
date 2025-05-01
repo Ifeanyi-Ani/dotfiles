@@ -6,31 +6,31 @@ local cmd = vim.cmd
 -- Performance related settings
 cmd("set noswapfile") -- Disable swap for better performance
 opt.hidden = true -- Enable background buffers
-opt.lazyredraw = true -- Don't redraw screen while executing macros
-opt.updatetime = 50 -- Faster completion
-opt.timeoutlen = 300 -- Faster key sequence completion
-opt.ttimeoutlen = 10 -- Faster key response time
-opt.redrawtime = 1500 -- Allow more time for loading syntax on large files
+-- opt.lazyredraw = true -- Don't redraw screen while executing macros
+-- opt.updatetime = 50 -- Faster completion
+-- opt.timeoutlen = 300 -- Faster key sequence completion
+-- opt.ttimeoutlen = 10 -- Faster key response time
+-- opt.redrawtime = 1500 -- Allow more time for loading syntax on large files
 
 -- Disable netrw (use alternative file explorer for better performance)
-g.loaded_netrw = 1
-g.loaded_netrwPlugin = 1
-g.netrw_liststyle = 3 -- Keep this if you still want to use netrw occasionally
+-- g.loaded_netrw = 1
+-- g.loaded_netrwPlugin = 1
+-- g.netrw_liststyle = 3 -- Keep this if you still want to use netrw occasionally
 
 -- Editor settings
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true -- Highlight current line
-opt.signcolumn = "yes" -- Prevent text shift
+-- opt.signcolumn = "yes" -- Prevent text shift
 
 -- Tabs & indentation
 opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
 opt.shiftwidth = 2 -- 2 spaces for indent width
 opt.softtabstop = 2 -- Match tabstop
-opt.expandtab = true -- Expand tab to spaces
-opt.autoindent = true -- Copy indent from current line when starting new one
-opt.smartindent = true -- Improve indentation
-opt.wrap = false -- No line wrapping
+-- opt.expandtab = true -- Expand tab to spaces
+-- opt.autoindent = true -- Copy indent from current line when starting new one
+-- opt.smartindent = true -- Improve indentation
+-- opt.wrap = false -- No line wrapping
 
 -- Search settings
 opt.ignorecase = true -- Ignore case when searching
@@ -50,8 +50,8 @@ opt.clipboard:append("unnamedplus") -- Use system clipboard
 opt.mouse = "a" -- Enable mouse for all modes
 
 -- File handling
-opt.scrolloff = 10
-opt.sidescrolloff = 10
+-- opt.scrolloff = 10
+-- opt.sidescrolloff = 10
 opt.fileencoding = "utf-8" -- Use UTF-8 encoding
 opt.writebackup = false -- Don't create backup before overwriting file
 opt.undofile = true -- Enable persistent undo

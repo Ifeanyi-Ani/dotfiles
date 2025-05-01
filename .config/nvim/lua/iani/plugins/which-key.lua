@@ -9,6 +9,7 @@ return {
       win = {
         border = "rounded",
       },
+      preset = "helix",
     })
     wk.add({
       { "<leader>f", group = "Fuzzy Find" },

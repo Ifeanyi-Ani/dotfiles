@@ -1,4 +1,3 @@
--- plugins/flutter.lua
 return {
   -- Flutter tools for Neovim
   {
@@ -6,7 +5,7 @@ return {
     lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim", -- optional for improved UI
+      "stevearc/dressing.nvim",
     },
     config = function()
       require("flutter-tools").setup({

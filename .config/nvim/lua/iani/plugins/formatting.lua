@@ -28,7 +28,7 @@ return {
       liquid = { "prettierd" },
       lua = { "stylua" },
       python = { "isort", "black" },
-      dart = { "dart_format" }, -- Add Dart formatter
+      dart = { "dart_format" },
     },
     default_format_opts = {
       lsp_format = "fallback",
@@ -54,7 +54,7 @@ return {
   init = function()
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
-    -- Add Flutter-specific formatting
+    -- Flutter-specific formatting
     local flutter_tools_ok, flutter_tools = pcall(require, "flutter-tools")
     if flutter_tools_ok then
       flutter_tools.setup({
